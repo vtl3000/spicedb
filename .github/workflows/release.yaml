@@ -16,9 +16,13 @@ jobs:
       - uses: "actions/checkout@v3"
         with:
           fetch-depth: 0
-      - uses: "authzed/actions/setup-go@main"
+      - uses: "actions/setup-go@v3"
         with:
           go-version: "${{ env.GO_VERSION }}"
+          cache: "true"
+      - name: "Run Go Mod Download"
+        shell: "bash"
+        run: "go mod download"
       - uses: "authzed/actions/docker-login@main"
         with:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
